@@ -13,10 +13,13 @@ const langtoflag = require("./langtoflag.json");
 
 client.on("ready", () => {
     console.log("The bot is online.");
+    console.log(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`)
     client.user.setActivity("human/cyborg relations");
 });
 
 client.on("message", (message) => {
+
+    if(message.author.bot) return;
 
     // Separate command and args
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
@@ -26,9 +29,11 @@ client.on("message", (message) => {
         if (!message.member.roles.cache.has(config.adminid)) {
             return message.channel.send("Reboot command denied.")
         }
-        message.channel.send('C-3PO, human/cyborg relations, rebooting.')
-            .then(() => client.destroy())
-            .then(() => shell.exec('./restart.sh'));
+        if (message.content.includes(config.prefix)) {
+            message.channel.send('C-3PO, human/cyborg relations, rebooting.')
+                .then(() => client.destroy())
+                .then(() => shell.exec('./restart.sh'));
+        }
     }
 
 
