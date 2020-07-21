@@ -1,6 +1,4 @@
 const Discord = require('discord.js');
-const language = require('./langOptions');
-const speech = require('./messages');
 const {Translate} = require('@google-cloud/translate').v2;
 const translate = new Translate();
 
