@@ -5,7 +5,6 @@ const translate = new Translate();
 
 const client = new Discord.Client();
 const config = require("./config.json");
-const GOOGLE_APPLICATION_CREDENTIALS = require("./google-service-account");
 
 client.on("ready", () => {
     console.log("The bot is ready.");
