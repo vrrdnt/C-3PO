@@ -8,7 +8,6 @@ const translate = new Translate();
 
 
 const client = new Discord.Client();
-const config = require("./config.json");
 const prefix = process.env.BOT_PREFIX
 const langtoflag = require("./langtoflag.json");
 
