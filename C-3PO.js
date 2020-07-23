@@ -9,6 +9,7 @@ const translate = new Translate();
 
 const client = new Discord.Client();
 const config = require("./config.json");
+const prefix = process.env.BOT_PREFIX
 const langtoflag = require("./langtoflag.json");
 
 client.on("ready", () => {
@@ -26,7 +27,7 @@ client.on("message", (message) => {
     const command = args.shift().toLowerCase();
 
     if (command === "restart") {
-        if (!message.member.roles.cache.has(config.adminid)) {
+        if (!message.member.roles.cache.has(process.env.BOT_ADMIN_ID)) {
             return message.channel.send("Reboot command denied.")
         }
         if (message.content.includes(config.prefix)) {
@@ -65,4 +66,4 @@ client.on("message", (message) => {
 
 })
 
-client.login(config.token);
+client.login(process.env.BOT_TOKEN);
