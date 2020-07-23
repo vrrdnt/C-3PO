@@ -59,7 +59,7 @@ client.on("message", (message) => {
     if (!message.author.bot) {
         text = message.content.toString();
         let chance = Math.random();
-        if (chance < 0.1)
+        if (chance < 0.05)
             translateText(message.content);
     }
 
