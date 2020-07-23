@@ -1,18 +1,30 @@
 {
-  "name": "discord-translation-bot",
+  "name": "C-3PO",
   "version": "1.0.0",
-  "description": "",
-  "main": "C-3PO.js",
+  "description": "bastard translation bot",
+  "main": "bot.js",
   "engines": {
-    "node": "8.x",
+    "node": "12.x",
     "npm": "*"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node C-3PO.js"
+    "start": "node bot.js"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vrrdnt/C-3PO.git"
+  },
+  "keywords": [
+    "heroku",
+    "discord.js"
+  ],
+  "author": "vrrdnt",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/synicalsyntax/discord.js-heroku/issues"
+  },
+  "homepage": "https://github.com/vrrdnt/C-3PO#readme",
   "dependencies": {
     "@google-cloud/translate": "^6.0.2",
     "discord.js": "^12.2.0",
