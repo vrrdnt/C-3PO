@@ -1,0 +1,7 @@
+{
+  "name": "C-3PO",
+  "description": "bastard translation bot",
+  "repository": "https://github.com/vrrdnt/C-3PO",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "keywords": ["node", "express", "static"]
+}
