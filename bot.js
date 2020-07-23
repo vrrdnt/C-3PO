@@ -1,9 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs')
 const shell = require('shelljs');
-const {
-    Translate
-} = require('@google-cloud/translate').v2;
+const {Translate} = require('@google-cloud/translate').v2;
 const translate = new Translate();
 
 
@@ -22,14 +20,14 @@ client.on("message", (message) => {
     if(message.author.bot) return;
 
     // Separate command and args
-    const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
 
     if (command === "restart") {
         if (!message.member.roles.cache.has(process.env.BOT_ADMIN_ID)) {
             return message.channel.send("Reboot command denied.")
         }
-        if (message.content.includes(config.prefix)) {
+        if (message.content.includes(prefix)) {
             message.channel.send('C-3PO, human/cyborg relations, rebooting.')
                 .then(() => client.destroy())
                 .then(() => shell.exec('./restart.sh'));
@@ -41,8 +39,7 @@ client.on("message", (message) => {
         'en', 'eo', 'et', 'tl', 'fi', 'fr', 'fy', 'gl', 'ka', 'de', 'el', 'gu', 'ht', 'ha', 'haw', 'iw', 'hi', 'hmn', 'hu', 'is', 'ig', 'id', 'ga',
         'it', 'ja', 'jw', 'kn', 'kk', 'km', 'ko', 'ku', 'ky', 'lo', 'la', 'lv', 'lt', 'lb', 'mk', 'mg', 'ms', 'ml', 'mt', 'mi', 'mr', 'mn', 'my',
         'ne', 'no', 'ps', 'fa', 'pl', 'pt', 'ma', 'ro', 'ru', 'sm', 'gd', 'sr', 'st', 'sn', 'sd', 'si', 'sk', 'sl', 'so', 'es', 'su', 'sw', 'sv',
-        'tg', 'ta', 'te', 'th', 'tr', 'uk', 'ur', 'uz', 'vi', 'cy', 'xh', 'yi', 'yo', 'zu'
-    ];
+        'tg', 'ta', 'te', 'th', 'tr', 'uk', 'ur', 'uz', 'vi', 'cy', 'xh', 'yi', 'yo', 'zu'];
     let randomTarget = target[Math.floor(Math.random() * target.length)];
 
     let text;
