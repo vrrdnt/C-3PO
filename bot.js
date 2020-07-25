@@ -1,9 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs')
 const shell = require('shelljs');
-const {
-    Translate
-} = require('@google-cloud/translate').v2;
+const {Translate} = require('@google-cloud/translate').v2;
 
 const projectId = process.env.GOOGLE_PROJECT_ID;
 
@@ -62,6 +60,7 @@ client.on("message", (message) => {
         translations.forEach((translation, i) => {
             message.channel.send(`${translation}`)
                 .then(m => m.react(langtoflag[randomTarget]))
+                .catch(error => console.log(`Error: ${error}`))
         });
     }
 
@@ -69,7 +68,7 @@ client.on("message", (message) => {
     if (!message.author.bot) {
         text = message.content.toString();
         let chance = Math.random();
-        if (chance < 0.05)
+        if (chance < 0.01)
             translateText(message.content);
     }
 
