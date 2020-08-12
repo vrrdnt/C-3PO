@@ -3,4 +3,4 @@ useless translation bot
 
 ## INSTALLATION
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+you shouldn't, it's a pain to get up

@@ -13,6 +13,7 @@ const translate = new Translate({
     }
 });
 
+require('dotenv').config();
 
 const client = new Discord.Client();
 const prefix = process.env.BOT_PREFIX
