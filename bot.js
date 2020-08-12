@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
-const fs = require('fs')
 const shell = require('shelljs');
 const {Translate} = require('@google-cloud/translate').v2;
+require('dotenv').config();
 
 const projectId = process.env.GOOGLE_PROJECT_ID;
 
@@ -12,8 +12,6 @@ const translate = new Translate({
         client_email: process.env.GOOGLE_CLIENT_EMAIL
     }
 });
-
-require('dotenv').config();
 
 const client = new Discord.Client();
 const prefix = process.env.BOT_PREFIX
