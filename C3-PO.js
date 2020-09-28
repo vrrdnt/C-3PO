@@ -19,8 +19,7 @@ const langtoflag = require("./langtoflag.json");
 
 client.on("ready", () => {
     console.log("The bot is online.");
-    console.log(
-        `Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`)
+    console.log(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`)
     client.user.setActivity("human/cyborg relations");
 });
 
@@ -33,16 +32,15 @@ client.on("message", (message) => {
     const command = args.shift().toLowerCase();
 
     if (command === "restart") {
-        if (!message.member.roles.cache.has(process.env.BOT_ADMIN_ID)) {
+        if (!(message.member.roles.cache.has(process.env.BOT_ADMIN_ID))) {
             return message.channel.send("Reboot command denied.")
         }
-        if (message.content.includes(prefix)) {
-            message.channel.send('C-3PO, human/cyborg relations, rebooting.')
-                .then(() => client.destroy()
-                    .then(() => shell.exec('heroku ps:restart worker.1')));
+        if (message.content.startsWith(prefix)) {
+            message.channel.send('C-3PO rebooting.')
+                .then(() => client.destroy());
+            shell.exec('./restart.sh');
         }
     }
-
 
     let target = ['af', 'sq', 'am', 'ar', 'hy', 'az', 'eu', 'be', 'bn', 'bs', 'bg', 'ca', 'ceb', 'ny', 'zh-cn', 'zh-tw', 'co', 'hr', 'cs', 'da', 'nl',
         'en', 'eo', 'et', 'tl', 'fi', 'fr', 'fy', 'gl', 'ka', 'de', 'el', 'gu', 'ht', 'ha', 'haw', 'iw', 'hi', 'hmn', 'hu', 'is', 'ig', 'id', 'ga',
@@ -53,22 +51,27 @@ client.on("message", (message) => {
     let randomTarget = target[Math.floor(Math.random() * target.length)];
 
     let text;
-    async function translateText() {
-        let [translations] = await translate.translate(text, randomTarget);
+    async function translateText(text, target) {
+        let [translations] = await translate.translate(text, target);
         translations = Array.isArray(translations) ? translations : [translations];
         translations.forEach((translation, i) => {
             message.channel.send(`${translation}`)
-                .then(m => m.react(langtoflag[randomTarget]))
+                .then(m => m.react(langtoflag[target]))
                 .catch(error => console.log(`Error: ${error}`))
         });
     }
 
 
     if (!message.author.bot) {
-        text = message.content.toString();
         let chance = Math.random();
         if (chance < 0.01)
-            translateText(message.content);
+            translateText(message.content.toString(), randomTarget);
+    }
+
+    if (command === "translate") {
+        console.log(args[0])
+        console.log(args.join(' '))
+        translateText(args.slice(1).join(' '), args[0])
     }
 
 })
